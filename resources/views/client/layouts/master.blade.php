@@ -244,7 +244,7 @@
                                                 </ul>
                                             </li>
                                             <li class="drop-holder">
-                                                <a href="javascript:void(0)">Blog
+                                                <a href="javascript:void(0)">Bài viết
                                                     <i class="fa fa-chevron-down"></i>
                                                 </a>
                                                 <ul class="drop-menu">
@@ -285,7 +285,7 @@
                                                 </ul>
                                             </li>
                                             <li>
-                                                <a href='contact.html'>Contact</a>
+                                                <a href='contact.html'>Liên hệ</a>
                                             </li>
                                         </ul>
                                     </nav>
