@@ -84,10 +84,22 @@
                                             <button class="btn btn-link dropdown-toggle ht-btn p-0" type="button" id="settingButton" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i class="pe-7s-users"></i>
                                             </button>
-                                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingButton">
-                                                <li><a class='dropdown-item' href='my-account.html'>Tài khoản của tôi</a></li>
-                                                <li><a class='dropdown-item' href='login-register.html'>Đăng xuất</a></li>
-                                            </ul>
+                                            @if (Route::has('login'))
+                                                @auth
+                                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingButton">
+                                                        @if (Auth::user()->type == 'admin')
+                                                        <li><a class='dropdown-item' href='{{route('admin.')}}'>Database</a></li>
+                                                        @endif
+                                                        <li><a class='dropdown-item' href='{{route('profile')}}'>Tài khoản của tôi</a></li>
+                                                        <li><a class='dropdown-item' href='{{route('logout')}}'>Đăng xuất</a></li>
+                                                    </ul>
+                                                @else
+                                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="settingButton">
+                                                        <li><a class='dropdown-item' href='{{route('login')}}'>Đăng nhập</a></li>
+                                                        <li><a class='dropdown-item' href='{{route('register')}}'>Đăng ký</a></li>
+                                                    </ul>
+                                                @endauth
+                                            @endif
                                         </li>
                                         <li class="d-none d-md-block">
                                             <a href='wishlist.html'>
@@ -136,99 +148,10 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href='about.html'>Về chúng tôi</a>
+                                                <a href='{{route('about')}}'>Về chúng tôi</a>
                                             </li>
                                             <li class="megamenu-holder">
-                                                <a href="{{route('shop')}}">Cửa hàng
-                                                    <i class="fa fa-chevron-down"></i>
-                                                </a>
-                                                <ul class="drop-menu megamenu">
-                                                    <li>
-                                                        <span class="title"></span>
-                                                        <ul>
-                                                            <li>
-                                                                <a href='shop.html'>Shop Default</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href='shop-left-sidebar.html'>Shop Left Sidebar</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href='shop-right-sidebar.html'>Shop Right Sidebar</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href='shop-list-fullwidth.html'>Shop List Fullwidth</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href='shop-list-left-sidebar.html'>Shop List Left Sidebar</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href='shop-list-right-sidebar.html'>Shop List Right Sidebar</a>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li>
-                                                        <span class="title">Product Style</span>
-                                                        <ul>
-                                                            <li>
-                                                                <a href='single-product.html'>Single Product Default</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href='single-product-group.html'>Single Product Group</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href='single-product-variable.html'>Single Product Variable</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href='single-product-sale.html'>Single Product Sale</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href='single-product-sticky.html'>Single Product Sticky</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href='single-product-affiliate.html'>Single Product Affiliate</a>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li>
-                                                        <span class="title">Product Related</span>
-                                                        <ul>
-                                                            <li>
-                                                                <a href='my-account.html'>My Account</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href='login-register.html'>Login | Register</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href='cart.html'>Shopping Cart</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href='wishlist.html'>Wishlist</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href='compare.html'>Compare</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href='checkout.html'>Checkout</a>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="menu-slider-wrap">
-                                                        <div class="swiper-container menu-slider">
-                                                            <div class="swiper-wrapper">
-                                                                <div class="swiper-slide img-zoom-effect with-overlay">
-                                                                    <a href="#" class="single-item">
-                                                                        <img class="img-full" src="{{ asset('style/client/images/megamenu/slider/1.jpg') }}" alt="Megamenu Slider">
-                                                                    </a>
-                                                                </div>
-                                                                <div class="swiper-slide img-zoom-effect with-overlay">
-                                                                    <a href="#" class="single-item">
-                                                                        <img class="img-full" src="{{ asset('style/client/images/megamenu/slider/2.jpg') }}" alt="Megamenu Slider">
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                                                <a href="{{route('shop')}}">Cửa hàng</a>
                                             </li>
                                             <li class="drop-holder">
                                                 <a href="javascript:void(0)">Pages
@@ -626,16 +549,18 @@
                                     @endphp
                                     <li class="minicart-product">
                                         <a class="product-item_remove" href="{{ route('removeFromCart', $id) }}"><i class="pe-7s-close"></i></a>
-                                        <a class='product-item_img' href='shop.html'>
-                                            <img class="img-full" src="{{ Storage::url($items['image']) }}" alt="Product Image">
+                                        <a class='product-item_img' href='{{ route('product', ['product' => Str::slug($items['name']) ]) }}'>
+                                            <img class="img-full" src="{{ Storage::url($items['image']) }}" alt="{{ $items['name'] }}">
                                         </a>
                                         <div class="product-item_content">
-                                            <a class='product-item_title' href='shop.html'>{{ $items['name'] }}</a>
+                                            <a class='product-item_title' href='{{ route('product', ['product' => Str::slug($items['name']) ]) }}'>{{ $items['name'] }}</a>
+                                            <span class="product-item_variant">{{ isset($items['size']) ? $items['size'] : '' }} 
+                                                {{ isset($items['size']) && isset($items['color']) ? '+' : 'Khum' }} 
+                                                {{ isset($items['color']) ? $items['color'] : '' }}</span>
                                             <span class="product-item_quantity">{{$items['quantity']}} * {{ number_format($items['price']) }}đ</span>
                                         </div>
                                     </li>
                                 @endforeach
-                            
                             </ul>
                         </div>
                         <div class="minicart-item_total">
@@ -647,8 +572,8 @@
                             <a class='btn btn-secondary btn-primary-hover' href='{{route('checkout')}}'>Thanh toán</a>
                         </div>
                         @else
-                                <li class="text-center">Giỏ hàng trống</li>
-                            @endif
+                            <li class="text-center">Giỏ hàng trống</li>
+                        @endif
                 </div>
             </div>
             

@@ -32,8 +32,7 @@ class CheckoutController extends Controller
 
     public function thankYou() 
     {
-        $categories = Category::all();
-        session()->forget('cart');
+    $categories = Category::all();
 
     return view('client.harmics.thanks', compact('categories'));
     } 

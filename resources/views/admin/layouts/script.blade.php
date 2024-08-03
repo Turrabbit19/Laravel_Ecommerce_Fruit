@@ -17,3 +17,8 @@
 <script src="{{ asset('style/admin/js/demo/chart-area-demo.js') }}"></script>
 <script src="{{ asset('style/admin/js/demo/chart-pie-demo.js') }}"></script>
 <script src="{{ asset('style/admin/js/demo/datatables-demo.js') }}"></script>
+
+<!-- Libs -->
+<script src="{{asset('style/admin/libs/@ckeditor/ckeditor5-build-classic/build/ckeditor.js')}}"></script>
+<script src="{{asset('style/admin/libs/dropzone/dropzone-min.js')}}"></script>
+<script src="{{asset('style/admin/js/create-product.init.js')}}"></script>

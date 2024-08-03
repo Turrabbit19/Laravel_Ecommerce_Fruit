@@ -419,23 +419,24 @@
     <div class="container">
         <div class="section-title text-center pb-55">
             <span class="sub-title text-primary">See Our Latest</span>
-            <h2 class="title mb-0">Arrival Products</h2>
+            <h2 class="title mb-0">Sản phẩm nổi bật gần đây</h2>
         </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="swiper-container product-list-slider border-issue">
                     <div class="swiper-wrapper">
+                        @foreach ($prosView as $prV)
                         <div class="swiper-slide">
                             <div class="product-list-item">
                                 <div class="product-img img-zoom-effect">
-                                    <a href='single-product.html'>
-                                        <img class="img-full" src="{{ asset('style/client/images/product/small-size/1-1-112x124.jpg') }}" alt="Product Images">
+                                    <a href='{{ route('product', ['product' => $prV->slug]) }}'>
+                                        <img class="img-full" src="{{ Storage::url($prV->img_thumb) }}" alt="{{$prV->name}}">
                                     </a>
                                 </div>
                                 <div class="product-content">
-                                    <a class='product-name' href='single-product.html'>Black Pepper Grains</a>
+                                    <a class='product-name' href='{{ route('product', ['product' => $prV->slug]) }}'>{{$prV->name}}</a>
                                     <div class="price-box pb-1">
-                                        <span class="new-price">$80.00</span>
+                                        <span class="new-price">{{$prV->price}}</span>
                                     </div>
                                     <div class="rating-box-wrap">
                                         <div class="rating-box">
@@ -460,181 +461,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="swiper-slide">
-                            <div class="product-list-item">
-                                <div class="product-img img-zoom-effect">
-                                    <a href='single-product.html'>
-                                        <img class="img-full" src="{{ asset('style/client/images/product/small-size/1-2-112x124.jpg') }}" alt="Product Images">
-                                    </a>
-                                </div>
-                                <div class="product-content">
-                                    <a class='product-name' href='single-product.html'>Peanut Big Bean</a>
-                                    <div class="price-box pb-1">
-                                        <span class="new-price">$80.00</span>
-                                    </div>
-                                    <div class="rating-box-wrap">
-                                        <div class="rating-box">
-                                            <ul>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product-add-action">
-                                            <ul>
-                                                <li>
-                                                    <a href='cart.html'>
-                                                        <i class="pe-7s-cart"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="product-list-item">
-                                <div class="product-img img-zoom-effect">
-                                    <a href='single-product.html'>
-                                        <img class="img-full" src="{{ asset('style/client/images/product/small-size/1-3-112x124.jpg') }}" alt="Product Images">
-                                    </a>
-                                </div>
-                                <div class="product-content">
-                                    <a class='product-name' href='single-product.html'>Dried Lemon Green</a>
-                                    <div class="price-box pb-1">
-                                        <span class="new-price">$80.00</span>
-                                    </div>
-                                    <div class="rating-box-wrap">
-                                        <div class="rating-box">
-                                            <ul>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product-add-action">
-                                            <ul>
-                                                <li>
-                                                    <a href='cart.html'>
-                                                        <i class="pe-7s-cart"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="product-list-item">
-                                <div class="product-img img-zoom-effect">
-                                    <a href='single-product.html'>
-                                        <img class="img-full" src="{{ asset('style/client/images/product/small-size/1-4-112x124.jpg') }}" alt="Product Images">
-                                    </a>
-                                </div>
-                                <div class="product-content">
-                                    <a class='product-name' href='single-product.html'>Natural Coconut</a>
-                                    <div class="price-box pb-1">
-                                        <span class="new-price">$80.00</span>
-                                    </div>
-                                    <div class="rating-box-wrap">
-                                        <div class="rating-box">
-                                            <ul>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product-add-action">
-                                            <ul>
-                                                <li>
-                                                    <a href='cart.html'>
-                                                        <i class="pe-7s-cart"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="product-list-item">
-                                <div class="product-img img-zoom-effect">
-                                    <a href='single-product.html'>
-                                        <img class="img-full" src="{{ asset('style/client/images/product/small-size/1-5-112x124.jpg') }}" alt="Product Images">
-                                    </a>
-                                </div>
-                                <div class="product-content">
-                                    <a class='product-name' href='single-product.html'>Black Peppepr Read</a>
-                                    <div class="price-box pb-1">
-                                        <span class="new-price">$80.00</span>
-                                    </div>
-                                    <div class="rating-box-wrap">
-                                        <div class="rating-box">
-                                            <ul>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product-add-action">
-                                            <ul>
-                                                <li>
-                                                    <a href='cart.html'>
-                                                        <i class="pe-7s-cart"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="product-list-item">
-                                <div class="product-img img-zoom-effect">
-                                    <a href='single-product.html'>
-                                        <img class="img-full" src="{{ asset('style/client/images/product/small-size/1-6-112x124.jpg') }}" alt="Product Images">
-                                    </a>
-                                </div>
-                                <div class="product-content">
-                                    <a class='product-name' href='single-product.html'>Green Vegetable</a>
-                                    <div class="price-box pb-1">
-                                        <span class="new-price">$80.00</span>
-                                    </div>
-                                    <div class="rating-box-wrap">
-                                        <div class="rating-box">
-                                            <ul>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                                <li><i class="pe-7s-star"></i></li>
-                                            </ul>
-                                        </div>
-                                        <div class="product-add-action">
-                                            <ul>
-                                                <li>
-                                                    <a href='cart.html'>
-                                                        <i class="pe-7s-cart"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                     <!-- Add Arrows -->
                     <div class="swiper-button-next"></div>

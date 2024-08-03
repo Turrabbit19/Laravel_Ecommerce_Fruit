@@ -44,21 +44,13 @@
                                         <img class="img-full" src="{{Storage::url($product->img_thumb)}}" alt="Product Image">
                                     </a>
                                 </div>
+                                @foreach ($imageProduct as $imgP)
                                 <div class="swiper-slide">
-                                    <a href="{{Storage::url($product->img_thumb)}}" class="single-img gallery-popup">
-                                        <img class="img-full" src="{{Storage::url($product->img_thumb)}}" alt="Product Image">
+                                    <a href="{{Storage::url($imgP->image)}}" class="single-img gallery-popup">
+                                        <img class="img-full" src="{{Storage::url($imgP->image)}}" alt="Product Image">
                                     </a>
                                 </div>
-                                <div class="swiper-slide">
-                                    <a href="{{Storage::url($product->img_thumb)}}" class="single-img gallery-popup">
-                                        <img class="img-full" src="{{Storage::url($product->img_thumb)}}" alt="Product Image">
-                                    </a>
-                                </div>
-                                <div class="swiper-slide">
-                                    <a href="{{Storage::url($product->img_thumb)}}" class="single-img gallery-popup">
-                                        <img class="img-full" src="{{Storage::url($product->img_thumb)}}" alt="Product Image">
-                                    </a>
-                                </div>
+                                @endforeach
                             </div>
                             <!-- Add Pagination -->
                             <div class="swiper-pagination"></div>
@@ -68,15 +60,11 @@
                                 <a href="javascript:void(0)" class="swiper-slide">
                                     <img class="img-full" src="{{Storage::url($product->img_thumb)}}" alt="Product Thumnail">
                                 </a>
+                                @foreach ($imageProduct as $imgP)
                                 <a href="javascript:void(0)" class="swiper-slide">
-                                    <img class="img-full" src="{{Storage::url($product->img_thumb)}}" alt="Product Thumnail">
+                                    <img class="img-full" src="{{Storage::url($imgP->image)}}" alt="Product Thumnail">
                                 </a>
-                                <a href="javascript:void(0)" class="swiper-slide">
-                                    <img class="img-full" src="{{Storage::url($product->img_thumb)}}" alt="Product Thumnail">
-                                </a>
-                                <a href="javascript:void(0)" class="swiper-slide">
-                                    <img class="img-full" src="{{Storage::url($product->img_thumb)}}" alt="Product Thumnail">
-                                </a>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -102,27 +90,32 @@
                                 <a href="javascript:void(0)">( {{$product->quantity}} )</a>
                             </div>
                         </div>
-                        <p class="short-desc mb-6">{{$product->description}}
-                        </p>
-                        <div class="selector-wrap color-option pb-2">
-                            <span>Color</span>
-                            <select class="nice-select wide rounded-0">
-                                <option value="default">Choose an option</option>
-                                <option value="blue">Blue</option>
-                                <option value="green">Green</option>
-                                <option value="red">Red</option>
-                            </select>
-                        </div>
-                        <div class="selector-wrap pb-6">
-                            <span>Logo</span>
-                            <select class="nice-select wide rounded-0">
-                                <option value="default">Choose an option</option>
-                                <option value="yes">Yes</option>
-                                <option value="no">No</option>
-                            </select>
-                        </div>
+                        <p class="short-desc mb-6">{{$product->description}}</p>
+
                         <form action="{{ route('addToCart', $product->id) }}" method="POST">
                             @csrf
+                            @if ($sizes->isNotEmpty() && $colors->isNotEmpty())
+                                <div class="selector-wrap size-option pb-2">
+                                    <span>Kích thước</span>
+                                    <select class="nice-select wide rounded-0" id="size-select" name="size">
+                                        <option value="default">Lựa chọn...</option>
+                                        @foreach ($sizes as $size_id => $size_name)
+                                            <option value="{{ $size_id }}">{{ $size_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                
+                                <div class="selector-wrap color-option pb-6">
+                                    <span>Màu sắc</span>
+                                    <select class="nice-select wide rounded-0" id="color-select" name="color">
+                                        <option value="default">Lựa chọn...</option>
+                                        @foreach ($colors as $color_id => $color_name)
+                                            <option value="{{ $color_id }}">{{ $color_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>       
+                            @endif      
+
                             <ul class="quantity-with-btn pb-7">
                                 <li class="quantity">
                                     <div class="cart-plus-minus">
@@ -130,7 +123,7 @@
                                     </div>
                                 </li>
                                 <li class="add-to-cart">
-                                    <button type="submit" class="btn btn-custom-size lg-size btn-primary btn-secondary-hover rounded-0">Add to cart</button>
+                                    <button type="submit" class="btn btn-custom-size lg-size btn-primary btn-secondary-hover rounded-0">Thêm vào giỏ</button>
                                 </li>
                                 <li class="wishlist-btn-wrap">
                                     <a class='btn rounded-0' href='wishlist.html'>
@@ -138,13 +131,17 @@
                                     </a>
                                 </li>
                             </ul>
-                        </form>      
-                        
+                        </form>   
                         @if (session('success'))
                             <div class="text-start text-success mb-3">        
-                                <span>{{session('success')}}</span>
+                                <span>{{ session('success') }}</span>
                             </div>
                         @endif
+                        @if (session('error'))
+                            <div class="text-start text-danger mb-3">        
+                                <span>{{ session('error') }}</span>
+                            </div>
+                        @endif                              
 
                         <div class="product-category text-matterhorn pb-2">
                             <span class="title">Categories :</span>
@@ -443,5 +440,5 @@
         </div>
     </div>
 </main>
-    
+
 @endsection

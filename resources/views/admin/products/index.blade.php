@@ -23,7 +23,7 @@
 <div class="card shadow mb-4">
     <div class="card-body">
         <div class="table-responsive">    
-    @if (count($data) > 0)
+    @if (count($products) > 0)
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <th>#</th>
@@ -44,47 +44,47 @@
         </thead>
 
         <tbody>
-            @foreach ($data as $index => $pro)
+            @foreach ($products as $index => $pros)
                 <tr>
                     <td>{{$index + 1}}</td>
-                    <td>{{$pro->name}}</td>
-                    <td>{{$pro->slug}}</td>
-                    <td>{{$pro->sku}}</td>
+                    <td>{{$pros->name}}</td>
+                    <td>{{$pros->slug}}</td>
+                    <td>{{$pros->sku}}</td>
                     <td>
-                        @if($pro->img_thumb)
-                        <img src="{{Storage::url($pro->img_thumb)}}" alt="{{$pro->name}}" width="123">
+                        @if($pros->img_thumb)
+                        <img src="{{Storage::url($pros->img_thumb)}}" alt="{{$pros->name}}" width="123">
 
                         @else
                         <p></p>
                         @endif
                     </td>
-                    <td>{{number_format($pro->price)}}</td>
-                    <td>{{number_format($pro->price_sale)}}</td>
-                    <td>{{$pro->quantity}}</td>
-                    <td>{{$pro->view}}</td>
+                    <td>{{number_format($pros->price)}}</td>
+                    <td>{{number_format($pros->price_sale)}}</td>
+                    <td>{{$pros->quantity}}</td>
+                    <td>{{$pros->view}}</td>
                     <td>
-                        {!! $pro->is_active ? '<span class="badge bg-success text-white">Hoạt động</span>'
+                        {!! $pros->is_active ? '<span class="badge bg-success text-white">Hoạt động</span>'
                         : '<span class="badge bg-danger text-white">Không hoạt động</span>' !!}
                     </td>
-                    <td>{{date_format($pro->created_at, 'd/m/Y H:i:s')}}</td>
-                    <td>{{$pro->updated_at == $pro->created_at ? "" : date_format($pro->updated_at, 'd/m/Y H:i:s')}}</td>
-                    <td><a href="{{route('admin.products.show', $pro)}}"><button class="btn btn-info">
-                        <span class="icon text-white-50">
+                    <td>{{date_format($pros->created_at, 'd/m/Y H:i:s')}}</td>
+                    <td>{{$pros->updated_at == $pros->created_at ? "" : date_format($pros->updated_at, 'd/m/Y H:i:s')}}</td>
+                    <td><a href="{{route('admin.products.show', $pros)}}"><button class="btn btn-info">
+                        <span class="icon text-white">
                             <i class="fas fa-eye"></i>
                         </span>    
                     </button></a></td>
-                    <td><a href="{{route('admin.products.edit', $pro)}}"><button class="btn btn-warning">
-                        <span class="icon text-white-50">
+                    <td><a href="{{route('admin.products.edit', $pros)}}"><button class="btn btn-warning">
+                        <span class="icon text-white">
                             <i class="fas fa-exclamation-triangle"></i>
                         </span>
                     </button></a></td>
                     <td>
-                        <form action="{{route('admin.products.destroy', $pro)}}" method="POST">
+                        <form action="{{route('admin.products.destroy', $pros)}}" method="POST">
                             @csrf
                             @method('DELETE')
 
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa không?!??')">
-                                <span class="icon text-white-50">
+                                <span class="icon text-white">
                                     <i class="fas fa-trash"></i>
                                 </span>
                             </button>

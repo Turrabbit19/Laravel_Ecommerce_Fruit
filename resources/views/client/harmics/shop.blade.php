@@ -7,12 +7,12 @@
             <div class="row h-100">
                 <div class="col-lg-12">
                     <div class="breadcrumb-item">
-                        <h2 class="breadcrumb-heading">Shop Layout</h2>
+                        <h2 class="breadcrumb-heading">Cửa hàng</h2>
                         <ul>
                             <li>
-                                <a href='index.html'>Home <i class="pe-7s-angle-right"></i></a>
+                                <a href='index.html'>Trang chủ <i class="pe-7s-angle-right"></i></a>
                             </li>
-                            <li>Shop Left Sidebar</li>
+                            <li>Cửa hàng</li>
                         </ul>
                     </div>
                 </div>
@@ -26,7 +26,7 @@
                     <div class="sidebar-area">
                         <div class="widgets-searchbox mb-9">
                             <form id="widgets-searchbox" action="#">
-                                <input class="input-field" type="text" placeholder="Search">
+                                <input class="input-field" type="text" placeholder="Tìm kiếm">
                                 <button class="widgets-searchbox-btn" type="submit">
                                     <i class="pe-7s-search"></i>
                                 </button>

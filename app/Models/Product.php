@@ -29,4 +29,16 @@ class Product extends Model
     {
         return 'slug';
     }
+
+    public function categories() {
+        return $this->belongsToMany(Category::class, 'category_products');
+    }
+
+    public function variants() {
+        return $this->hasMany(ProductVariant::class);
+    }
+
+    public function galleries() {
+        return $this->hasMany(ProductGallery::class);
+    }
 }

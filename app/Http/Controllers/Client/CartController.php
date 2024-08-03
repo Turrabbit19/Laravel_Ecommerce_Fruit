@@ -11,23 +11,52 @@ class CartController extends Controller
 {
     public function addToCart(Request $request, $id) 
     {    
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
 
         $cart = session()->get('cart', []);
         
+        $sizeId = $request->size;
+        $colorId = $request->color;
         $quantity = $request->quantity;
-        
-        if(isset($cart[$id])) {
-            $cart[$id]['quantity'] += $quantity;
-        } else {
-            $cart[$id] = [
-                "name" => $product->name,
-                "price" => $product->price,
-                "quantity" => $quantity,
-                "image" => $product->img_thumb
-            ];
-        }
 
+        if($sizeId && $colorId) {
+            $variant = $product->variants()
+            ->where('product_size_id', $sizeId)
+            ->where('product_color_id', $colorId)
+            ->first();
+
+            if (!$variant || $variant->quantity < $quantity) {
+                return redirect()->back()->with('error', 'Số lượng không đủ hoặc biến thể không tồn tại.');
+            }
+            
+            $variantKey = "{$id}_{$sizeId}_{$colorId}";
+
+            if (isset($cart[$variantKey])) {
+                $cart[$variantKey]['quantity'] += $quantity;
+            } else {
+                $cart[$variantKey] = [
+                    "id" => $product->id,
+                    "name" => $product->name,
+                    "price" => $product->price,
+                    "quantity" => $quantity,
+                    "image" => $product->img_thumb,
+                    "size" => $variant->size->name,
+                    "color" => $variant->color->name,
+                ];
+            }
+        } else {
+            if(isset($cart[$id])) {
+                $cart[$id]['quantity'] += $quantity;
+            } else {
+                $cart[$id] = [
+                    "name" => $product->name,
+                    "price" => $product->price,
+                    "quantity" => $quantity,
+                    "image" => $product->img_thumb
+                ];
+            }
+        }
+        
         session()->put('cart', $cart);
 
         return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào giỏ hàng!');

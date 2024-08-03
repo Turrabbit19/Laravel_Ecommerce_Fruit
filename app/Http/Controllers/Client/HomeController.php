@@ -13,28 +13,46 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $products = Product::query()->latest('id')->take(8)->get();
+        $products = Product::query()->where('is_active', true)->latest('id')->take(8)->get();
+        $prosView = Product::query()->where('is_active', true)->latest('view')->take(6)->get();
         $cart = session()->get('cart', []);
 
-        return view(self::PATH_VIEW . 'index', compact('categories', 'products', 'cart'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('categories', 'products', 'prosView', 'cart'));
     }
 
     public function shop()
     {
         $categories = Category::all();
-        $products = Product::paginate(9);
+        $products = Product::where('is_active', true)->latest('id')->paginate(9);
+        $prosRate = Product::query()->where('is_active', true)->latest('view')->take(6)->get();
+
         $cart = session()->get('cart', []);
 
-        return view(self::PATH_VIEW . 'shop', compact('categories', 'products', 'cart'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('categories', 'products', 'cart'));
     }
 
     public function product(Product $product)
     {
         $categories = Category::all();
-        $products = Product::query()->latest('id')->take(8)->get();
+        $products = Product::query()->where('is_active', true)->latest('id')->take(8)->get();
+
+        $product->load('galleries', 'variants.size', 'variants.color');
+        $imageProduct = $product->galleries;
+        $variantProduct = $product->variants;
         $cart = session()->get('cart', []);
         
+        $sizes = $variantProduct ? $variantProduct->pluck('size.name', 'size.id')->unique() : null;
+        $colors = $variantProduct ? $variantProduct->pluck('color.name', 'color.id')->unique() : null;
+
         $product->increment('view');
-        return view(self::PATH_VIEW . 'product', compact('categories', 'products', 'product', 'cart'));
+
+        return view(self::PATH_VIEW . __FUNCTION__, compact('categories', 'products', 'product', 'imageProduct', 'sizes', 'colors', 'cart'));   
+    }
+
+    public function about() {
+        $categories = Category::all();
+        $cart = session()->get('cart', []);
+
+        return view(self::PATH_VIEW . __FUNCTION__, compact('categories', 'cart'));
     }
 }

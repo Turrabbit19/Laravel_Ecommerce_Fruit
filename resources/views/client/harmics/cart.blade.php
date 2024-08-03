@@ -53,6 +53,8 @@
                                             <th class="product_remove">Xóa</th>
                                             <th class="product-thumbnail">Ảnh</th>
                                             <th class="cart-product-name">Sản phẩm</th>
+                                            <th class="cart-product-size">Kích thước</th>
+                                            <th class="cart-product-color">Màu sắc</th>
                                             <th class="product-price">Giá</th>
                                             <th class="product-quantity">Số lượng</th>
                                             <th class="product-subtotal">Tổng</th>
@@ -79,6 +81,8 @@
                                                     </a>
                                                 </td>
                                                 <td class="product-name"><a href="javascript:void(0)">{{ $items['name'] }}</a></td>
+                                                <td class="product-name"><a href="javascript:void(0)">{{ isset($items['size']) ? $items['size'] : 'Khum' }}</a></td>
+                                                <td class="product-name"><a href="javascript:void(0)">{{ isset($items['color']) ? $items['color'] : 'Khum' }}</a></td>
                                                 <td class="product-price"><span class="amount">{{ number_format($items['price']) }} VND</span></td>
                                                 <td class="quantity">
                                                     <div class="cart-plus-minus">
