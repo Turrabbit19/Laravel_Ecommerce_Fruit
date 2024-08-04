@@ -47,7 +47,7 @@ class ProductController extends Controller
             $this->storeProductGalleries($product, $request->product_galleries);
         });
 
-        return redirect()->route('admin.products.index')->with('success', 'Thêm mới thành công');
+        return redirect()->route('admin.products.index')->with('success', 'Thêm mới thành công.');
     }
 
     public function show(Product $product)
@@ -79,14 +79,14 @@ class ProductController extends Controller
             $this->updateProductGalleries($product, $request->file('product_galleries'));
         }
 
-        return redirect()->route('admin.products.index')->with('success', 'Cập nhật thành công');
+        return redirect()->route('admin.products.index')->with('success', 'Cập nhật thành công.');
     }
 
     public function destroy(Product $product)
     {
         $this->deleteProductRelations($product);
         $product->delete();
-        return back()->with("success", "Xóa thành công");
+        return back()->with("success", "Xóa thành công.");
     }
 
     private function prepareProductData($request)

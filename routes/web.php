@@ -34,15 +34,15 @@ Route::get('removeCart/{id}', [CartController::class, 'removeFromCart'])->name('
 Route::get('checkout', [CheckoutController::class, 'viewCheckout'])->name('checkout')->middleware('auth', 'verified');
 Route::post('order', [OrderController::class, 'order'])->name('order');
 
-Route::get('thanks', [CheckoutController::class, 'thankYou'])->name('thanks');
+Route::get('thanks', [CheckoutController::class, 'thankYou'])->name('thanks')->middleware('auth', 'verified');
 
 Route::get('auth/login', [LoginController::class, 'index'])->name('login');
 Route::post('auth/login', [LoginController::class, 'login'])->name('login');
-Route::get('auth/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('auth/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth', 'verified');
 Route::get('auth/verify/{token}', [LoginController::class, 'verify'])->name('verifyEmail');
 
 Route::get('auth/register', [RegisterController::class, 'index'])->name('register');
 Route::post('auth/register', [RegisterController::class, 'register'])->name('register');
 Route::get('auth/verify', [RegisterController::class, 'verify'])->name('verify');
 
-Route::get('auth/profile', [ProfileController::class, 'index'])->name('profile');
+Route::get('auth/profile', [ProfileController::class, 'index'])->name('profile')->middleware('auth', 'verified');

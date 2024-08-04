@@ -37,7 +37,7 @@ class CategoryController extends Controller
         $cgr->is_active = $request->is_active;
         
         $cgr->save();
-        return redirect('/admin/categories')->with("success", "Thêm mới thành công");
+        return redirect('/admin/categories')->with("success", "Thêm mới thành công.");
     }
 
     public function show(Category $category)
@@ -52,7 +52,7 @@ class CategoryController extends Controller
 
     public function update(UpdateCategoryRequest $request, Category $category)
 {
-    $cgr = Category::find($category->id);
+    $cgr = Category::findOrFail($category->id);
     $cgr->name = $request->name;
 
     if ($request->hasFile('image')) {
@@ -66,12 +66,13 @@ class CategoryController extends Controller
     $cgr->is_active = $request->is_active;
 
     $cgr->save();
-    return redirect('/admin/categories')->with("success", "Cập nhật thành công");
+    return redirect('/admin/categories')->with("success", "Cập nhật thành công.");
 }
 
     public function destroy(Category $category)
     {
+        Storage::disk('public')->delete($category->image);
         $category->delete();
-        return back()->with("success", "Xóa thành công");
+        return back()->with("success", "Xóa thành công.");
     }
 }

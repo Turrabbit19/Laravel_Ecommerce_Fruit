@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\Category;
 use App\Models\Product;
 
@@ -15,9 +16,11 @@ class HomeController extends Controller
         $categories = Category::all();
         $products = Product::query()->where('is_active', true)->latest('id')->take(8)->get();
         $prosView = Product::query()->where('is_active', true)->latest('view')->take(6)->get();
+        $banners = Banner::query()->where('is_active', true)->latest('id')->take(3)->get();
+
         $cart = session()->get('cart', []);
 
-        return view(self::PATH_VIEW . __FUNCTION__, compact('categories', 'products', 'prosView', 'cart'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('categories', 'products', 'prosView', 'banners', 'cart'));
     }
 
     public function shop()
@@ -36,7 +39,7 @@ class HomeController extends Controller
         $categories = Category::all();
         $products = Product::query()->where('is_active', true)->latest('id')->take(8)->get();
 
-        $product->load('galleries', 'variants.size', 'variants.color');
+        $product->load('galleries', 'variants.size', 'variants.color', 'categories');
         $imageProduct = $product->galleries;
         $variantProduct = $product->variants;
         $cart = session()->get('cart', []);

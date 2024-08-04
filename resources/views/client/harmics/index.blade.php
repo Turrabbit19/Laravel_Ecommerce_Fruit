@@ -7,32 +7,21 @@
     <!-- Main Slider -->
     <div class="swiper-container main-slider-2 swiper-arrow with-bg_white">
         <div class="swiper-wrapper">
-            <div class="swiper-slide animation-style-01">
-                <div class="slide-inner bg-height" data-bg-image="{{ asset('style/client/images/slider/bg/2-1.jpg') }}">
-                    <div class="container">
-                        <div class="slide-content">
-                            <h2 class="title font-weight-bold mb-4">Fresh Organic <br> Products</h2>
-                            <p class="short-desc different-width mb-9">Best Offer Products 100% Naturan Healthy Food For Your Life</p>
-                            <div class="button-wrap">
-                                <a class='btn btn-custom-size lg-size btn-primary btn-white-hover rounded-0' href='shop.html'>Shop Now</a>
+            @foreach ($banners as $bans)
+                <div class="swiper-slide animation-style-01">
+                    <div class="slide-inner bg-height" data-bg-image="{{ Storage::url($bans->image) }}">
+                        <div class="container">
+                            <div class="slide-content">
+                                <h2 class="title font-weight-bold mb-4">Fresh Organic <br> Products</h2>
+                                <p class="short-desc different-width mb-9">Best Offer Products 100% Naturan Healthy Food For Your Life</p>
+                                <div class="button-wrap">
+                                    <a class='btn btn-custom-size lg-size btn-primary btn-white-hover rounded-0' href='{{route('shop')}}'>Shop Now</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="swiper-slide animation-style-01">
-                <div class="slide-inner bg-height" data-bg-image="{{ asset('style/client/images/slider/bg/2-2.jpg') }}">
-                    <div class="container">
-                        <div class="slide-content">
-                            <h2 class="title font-weight-bold mb-4">Fresh Organic <br> Products</h2>
-                            <p class="short-desc different-width mb-9">Best Offer Products 100% Naturan Healthy Food For Your Life</p>
-                            <div class="button-wrap">
-                                <a class='btn btn-custom-size lg-size btn-primary btn-white-hover rounded-0' href='shop.html'>Shop Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
         <!-- Add Pagination -->
         <div class="swiper-pagination with-bg d-md-none"></div>

@@ -56,7 +56,6 @@
         <!-- Heading -->
         <div class="sidebar-heading">Đức Khang</div>
 
-        <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
           <a
             class="nav-link collapsed"
@@ -83,13 +82,30 @@
           </div>
         </li>
 
-        <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
           <a class="nav-link" href="{{route('admin.orders.index')}}">
             <i class="fas fa-fw fa-table"></i>
             <span>Đơn hàng</span></a
           >
         </li>
+
+        <hr class="sidebar-divider">
+
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+             aria-expanded="true" aria-controls="collapseUtilities">
+              <i class="fas fa-fw fa-wrench"></i>
+              <span>Linh tinh</span>
+          </a>
+          <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+               data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                  <h6 class="collapse-header">Quản lý:</h6>
+                  <a class="collapse-item" href="{{route('admin.banners.index')}}">Banner slider</a>
+                  <a class="collapse-item" href="{{route('admin.coupons.index')}}">Phiếu giảm giá</a>
+              </div>
+          </div>
+      </li>
       </ul>
       <!-- End of Sidebar -->
 

@@ -144,20 +144,13 @@
                         @endif                              
 
                         <div class="product-category text-matterhorn pb-2">
-                            <span class="title">Categories :</span>
+                            <span class="title">Danh mục:</span>
                             <ul>
+                                @foreach ($product->categories as $proCgr)
                                 <li>
-                                    <a href="javascript:void(0)">Natural,</a>
+                                    <a href="javascript:void(0)">{{$proCgr->name}},</a>
                                 </li>
-                                <li>
-                                    <a href="javascript:void(0)">Organic,</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)">Beautiful,</a>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0)">Organic Food</a>
-                                </li>
+                                @endforeach
                             </ul>
                         </div>
                         <div class="product-category product-tags text-matterhorn pb-4">
