@@ -130,8 +130,12 @@
                                             </tr>
                                         @endforeach
                                         <tr>
-                                            <td colspan="4"><strong>Tổng cộng:</strong></td>
-                                            <td><strong>{{ number_format($totalAmount, 0, ',', '.') }}đ</strong></td>
+                                            <td colspan="6"><strong>Giảm:</strong></td>
+                                            <td><strong>{{ number_format($totalAmount - $order->bill->total_amount, 0, ',', '.') }}đ</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6"><strong>Tổng cộng:</strong></td>
+                                            <td><strong>{{ number_format($order->bill->total_amount, 0, ',', '.') }}đ</strong></td>
                                         </tr>
                                     </tbody>
                                 </table>

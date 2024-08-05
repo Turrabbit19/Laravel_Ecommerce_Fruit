@@ -19,7 +19,7 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        $order->load('products');
+        $order->load('products', 'bill');
         return view(self::PATH_VIEW . 'show', compact('order'));
     }
 

@@ -24,13 +24,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
+                    @if (session('success')) 
+                        <span class="text-success">{{ session('success') }}</span>
+                    @endif
+                    @if (session('error'))     
+                        <span class="text-danger">{{ session('error') }}</span>
+                    @endif
                     <div class="coupon-accordion">
                         <h3>Bạn có mã giảm giá? <span id="showcoupon">Nhấn vào đây để nhập nó</span></h3>
                         <div id="checkout_coupon" class="coupon-checkout-content">
                             <div class="coupon-info">
-                                <form action="javascript:void(0)">
+                                <form action="{{route('useCoupon')}}" method="POST">
+                                    @csrf
                                     <p class="checkout-coupon">
-                                        <input placeholder="Mã giảm giá" type="text">
+                                        <input placeholder="Mã giảm giá" type="text" name="coupon">
                                         <input class="coupon-inner_btn" value="Xác nhận" type="submit">
                                     </p>
                                 </form>
@@ -39,6 +46,7 @@
                     </div>
                 </div>
             </div>
+            
             <form action="{{route('order')}}" method="POST">
                 @csrf
                 <div class="row">
@@ -134,18 +142,22 @@
                                                     @endif
                                                     
                                                 </td>
-                                                <td class="cart-product-total text-center"><span class="amount">{{ number_format($items['price'] * $items['quantity']) }} VND</span></td>
+                                                <td class="cart-product-total text-center"><span class="amount">{{ number_format($items['price'] * $items['quantity']) }}đ</span></td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                     <tfoot>
                                         <tr class="cart-subtotal">
                                             <th>Giá ban đầu</th>
-                                            <td class="text-center"><span class="amount">{{ number_format($subtotal) }} VND</span></td>
+                                            <td class="text-center"><span class="amount">{{ number_format($subtotal) }}đ</span></td>
+                                        </tr>
+                                        <tr class="use-coupon">
+                                            <th>Giảm</th>
+                                            <td class="text-center"><span class="amount">{{ session('discount') ? number_format(session('discount')) . 'đ' : '0' }}</span></td>
                                         </tr>
                                         <tr class="order-total">
                                             <th>Tổng</th>
-                                            <td class="text-center"><strong><span class="amount ">{{ number_format($total) }} VND</span></strong></td>
+                                            <td class="text-center"><strong><span class="amount">{{ session('total') ? number_format(session('total')) . 'đ' : number_format($subtotal) . 'đ' }}</span></strong></td>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -189,7 +201,6 @@
                                             <div class="card-header" id="#payment-3">
                                                 <h5 class="panel-title">
                                                     <input class="form-check-input" type="radio" name="payment_method" id="momo" value="3">
-
                                                     <a href="javascript:void(0)" class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false">
                                                         Momo
                                                     </a>

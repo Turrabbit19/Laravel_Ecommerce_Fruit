@@ -83,13 +83,13 @@
                                                 <td class="product-name"><a href="javascript:void(0)">{{ $items['name'] }}</a></td>
                                                 <td class="product-name"><a href="javascript:void(0)">{{ isset($items['size']) ? $items['size'] : 'Khum' }}</a></td>
                                                 <td class="product-name"><a href="javascript:void(0)">{{ isset($items['color']) ? $items['color'] : 'Khum' }}</a></td>
-                                                <td class="product-price"><span class="amount">{{ number_format($items['price']) }} VND</span></td>
+                                                <td class="product-price"><span class="amount">{{ number_format($items['price']) }}đ</span></td>
                                                 <td class="quantity">
                                                     <div class="cart-plus-minus">
                                                         <input class="cart-plus-minus-box" name="quantity[{{ $id }}]" value="{{ $items['quantity'] }}" type="number" min="1">
                                                     </div>
                                                 </td>
-                                                <td class="product-subtotal"><span class="amount">{{ number_format($lineTotal) }} VND</span></td>
+                                                <td class="product-subtotal"><span class="amount">{{ number_format($lineTotal) }}đ</span></td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -99,8 +99,6 @@
                                 <div class="col-12">
                                     <div class="coupon-all">
                                         <div class="coupon">
-                                            <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Phiếu giảm giá" type="text">
-                                            <input class="button mt-xxs-30" name="apply_coupon" value="Áp dụng" type="submit">
                                         </div>
                                         <div class="coupon2">
                                             <input class="button" name="update_cart" value="Cập nhật" type="submit">
@@ -113,8 +111,8 @@
                                     <div class="cart-page-total">
                                         <h2>Tổng hóa đơn</h2>
                                         <ul>
-                                            <li>Giá <span>{{ number_format($subtotal) }} VND</span></li>
-                                            <li>Tổng <span>{{ number_format($subtotal) }} VND</span></li>
+                                            <li>Giá ban đầu <span>{{ number_format($subtotal) }}đ</span></li>
+                                            <li>Tổng tiền <span>{{ number_format($subtotal) }}đ</span></li>
                                         </ul>
                                         <a href="{{ route('checkout') }}">Thanh toán</a>
                                     </div>

@@ -32,6 +32,8 @@ Route::post('updateCart', [CartController::class, 'updateCart'])->name('updateCa
 Route::get('removeCart/{id}', [CartController::class, 'removeFromCart'])->name('removeFromCart');
 
 Route::get('checkout', [CheckoutController::class, 'viewCheckout'])->name('checkout')->middleware('auth', 'verified');
+Route::post('checkout/useCoupon', [CheckoutController::class, 'useCoupon'])->name('useCoupon');
+
 Route::post('order', [OrderController::class, 'order'])->name('order');
 
 Route::get('thanks', [CheckoutController::class, 'thankYou'])->name('thanks')->middleware('auth', 'verified');

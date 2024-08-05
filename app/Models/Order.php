@@ -26,4 +26,9 @@ class Order extends Model
     {
         return $this->hasMany(OrderDetail::class);
     }
+
+    public function bill() 
+    {
+        return $this->hasOne(Bill::class);
+    }
 }
