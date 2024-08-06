@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -51,5 +52,18 @@ class OrderConfirmed extends Mailable
     public function attachments(): array
     {
         return [];
+    }
+
+    /**
+     * Build the message and attach the PDF.
+     *
+     * @return $this
+     */
+    public function build()
+    {
+        $pdf = PDF::loadView('admin.mail.pdf', ['order' => $this->order]);
+
+        return $this->view('admin.mail.confirm')
+                    ->attachData($pdf->output(), 'Đơn hàng #' . $this->order->sku . '.pdf');
     }
 }

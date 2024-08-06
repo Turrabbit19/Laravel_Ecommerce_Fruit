@@ -68,5 +68,4 @@ class OrderController extends Controller
     return redirect()->route('thanks');
 }
 
-
 }
