@@ -12,7 +12,7 @@ class ProfileController extends Controller
     public function index() {
         $categories = Category::all();
         $cart = session()->get('cart', []);
-        $orders = Order::where('user_id', Auth::user()->id)->with('products')->get();
+        $orders = Order::where('user_id', Auth::user()->id)->with('products', 'bill')->get();
     
         foreach ($orders as $order) {
             $order->totalAmount = 0;

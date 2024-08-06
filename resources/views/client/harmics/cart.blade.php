@@ -72,7 +72,7 @@
                                             <tr>
                                                 <td class="product_remove">
                                                     <a href="{{ route('removeFromCart', $id) }}">
-                                                        <i class="pe-7s-close" title="Remove"></i>
+                                                        <i class="pe-7s-close" title="remove"></i>
                                                     </a>
                                                 </td>
                                                 <td class="product-thumbnail" width="170">

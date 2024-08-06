@@ -76,7 +76,7 @@
                                                         : ($ords->status == 4 ? 'Hoàn thành' : 'Đã hủy')))
                                                     }}
                                                 </td>
-                                                <td>{{ number_format($ords->totalAmount, 0, ',', '.') }}đ cho {{ $ords->totalQuantity }} sản phẩm</td>
+                                                <td>{{ number_format($ords->bill->total_amount, 0, ',', '.') }}đ cho {{ $ords->totalQuantity }} sản phẩm</td>
                                                 <td><a href="javascript:void(0)" class="btn btn-secondary btn-primary-hover"><span>Xem</span></a>                                            </tr>
                                             @endforeach
                                         </tbody>                                        
