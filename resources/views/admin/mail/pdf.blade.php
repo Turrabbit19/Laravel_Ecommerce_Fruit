@@ -68,6 +68,8 @@
             <thead>
                 <tr>
                     <th>Product</th>
+                    <th>Size</th>
+                    <th>Color</th>
                     <th>Quantity</th>
                     <th>Price</th>
                     <th>Total</th>
@@ -84,6 +86,8 @@
 
                     <tr>
                         <td>{{ $detail->product_name }}</td>
+                        <td>{{ $detail->size }}</td>
+                        <td>{{ $detail->color }}</td>
                         <td>{{ $detail->quantity }}</td>
                         <td>{{ number_format($detail->price, 0, ',', '.') }} VND</td>
                         <td>{{ number_format($detail->quantity * $detail->price, 0, ',', '.') }} VND</td>

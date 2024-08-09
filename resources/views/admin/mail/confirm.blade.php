@@ -54,6 +54,8 @@
             <thead>
                 <tr>
                     <th>Tên sản phẩm</th>
+                    <th>Kích cỡ</th>
+                    <th>Màu sắc</th>
                     <th>Số lượng</th>
                     <th>Giá</th>
                     <th>Thành tiền</th>
@@ -70,6 +72,8 @@
                 @endphp
                 <tr>
                     <td>{{ $detail->product_name }}</td>
+                    <td>{{ $detail->size }}</td>
+                    <td>{{ $detail->color }}</td>
                     <td>{{ $detail->quantity }}</td>
                     <td>{{ number_format($detail->price, 0, ',', '.') }} đ</td>
                     <td>{{ number_format($subtotal, 0, ',', '.') }} đ</td>

@@ -26,17 +26,16 @@ class CategoryController extends Controller
 
     public function store(StoreCategoryRequest $request)
     {
-        $cgr = new Category;
-        $cgr->name = $request->name;
+        $data = $request->validated();
+
         if ($request->hasFile('image')) {
             $url = $request->file('image')->store('categories', 'public');
         } else {
             $url = "";
         }
-        $cgr->image = $url;
-        $cgr->is_active = $request->is_active;
+        $data['image'] = $url;
         
-        $cgr->save();
+        Category::create($data);
         return redirect('/admin/categories')->with("success", "Thêm mới thành công.");
     }
 
@@ -52,20 +51,18 @@ class CategoryController extends Controller
 
     public function update(UpdateCategoryRequest $request, Category $category)
 {
-    $cgr = Category::findOrFail($category->id);
-    $cgr->name = $request->name;
+    $data = $request->validated();
 
     if ($request->hasFile('image')) {
-        if ($cgr->image) {
-            Storage::disk('public')->delete($cgr->image);
+        if ($category->image) {
+            Storage::disk('public')->delete($category->image);
         }
         $url = $request->file('image')->store('categories', 'public');
-        $cgr->image = $url;
-        $cgr->updated_at = Carbon::now();
+        $data['image'] = $url;
     }
-    $cgr->is_active = $request->is_active;
-
-    $cgr->save();
+    $data['updated_at'] = Carbon::now();
+    
+    $category->update($data);
     return redirect('/admin/categories')->with("success", "Cập nhật thành công.");
 }
 
