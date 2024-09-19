@@ -41,14 +41,13 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title text-center pb-55">
-                        <span class="sub-title text-primary">See Our Latest</span>
-                        <h2 class="title mb-0">Shop By Category</h2>
+                        <h2 class="title mb-0">Danh mục</h2>
                     </div>
                     <div class="product-category-item text-center">
                         <ul>
                             <li>
                                 <a href='shop.html'>
-                                    <img src="{{ asset('style/client/images/banner/category-icon/1.png') }}" alt="Product Category" width="170">
+                                    <img src="{{ asset('style/client/images/banner/category-icon/1.png') }}" alt="Product Category" width="169">
                                     All Items
                                 </a>
                             </li>
@@ -75,9 +74,9 @@
                             <img class="img-full" src="{{ asset('style/client/images/banner/1-1-370x250.jpg') }}" alt="Banner Image">
                             <div class="inner-content">
                                 <h5 class="offer">-10% Off</h5>
-                                <h4 class="title mb-5">Bell Pepper<br>Orange</h4>
+                                <h4 class="title mb-5">Ớt chuông<br>Cam</h4>
                                 <div class="button-wrap">
-                                    <a class='btn btn-primary btn-white-hover rounded-0' href='shop.html'>Shop Now</a>
+                                    <a class='btn btn-primary btn-white-hover rounded-0' href='shop.html'>Mua ngay</a>
                                 </div>
                             </div>
                         </div>
@@ -89,9 +88,9 @@
                             <img class="img-full" src="{{ asset('style/client/images/banner/1-2-370x250.jpg') }}" alt="Banner Image">
                             <div class="inner-content">
                                 <h5 class="offer">-20% Off</h5>
-                                <h4 class="title mb-5">Fruit Juice<br>Package</h4>
+                                <h4 class="title mb-5">Nước ép<br>Trái cây TƯƠI</h4>
                                 <div class="button-wrap">
-                                    <a class='btn btn-custom-size btn-primary btn-white-hover rounded-0' href='shop.html'>Shop Now</a>
+                                    <a class='btn btn-custom-size btn-primary btn-white-hover rounded-0' href='shop.html'>Mua ngay</a>
                                 </div>
                             </div>
                         </div>
@@ -103,9 +102,9 @@
                             <img class="img-full" src="{{ asset('style/client/images/banner/1-3-370x250.jpg') }}" alt="Banner Image">
                             <div class="inner-content">
                                 <h5 class="offer">-30% Off</h5>
-                                <h4 class="title mb-5">Full Fresh<br>Vegetable</h4>
+                                <h4 class="title mb-5">Rau củ<br>TƯƠI</h4>
                                 <div class="button-wrap">
-                                    <a class='btn btn-custom-size btn-primary btn-white-hover rounded-0' href='shop.html'>Shop Now</a>
+                                    <a class='btn btn-custom-size btn-primary btn-white-hover rounded-0' href='shop.html'>Mua ngay</a>
                                 </div>
                             </div>
                         </div>

@@ -30,15 +30,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">Mô tả sản phẩm</label>
-                            <div id="ckeditor-classic" name="description">
-                              <ul>
-                                  <li>Xuất xứ</li>
-                                  <li>Chất lượng</li>
-                                  <li>Đặc điểm sản phẩm</li>
-                                  <li>Bảo quản và sử dụng</li>
-                                  <li>Lợi ích</li>
-                              </ul>
-                          </div>
+                            <textarea name="description" id="ckeditor-classic"></textarea>
                         </div>
                     </div>
                 </div>

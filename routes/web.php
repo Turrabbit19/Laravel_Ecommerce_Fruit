@@ -22,8 +22,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('about', [HomeController::class, 'about'])->name('about');
+Route::get('contact', [HomeController::class, 'contact'])->name('contact');
 
 Route::get('shop', [HomeController::class, 'shop'])->name('shop');
+Route::get('search', [HomeController::class, 'shop'])->name('shop.search');
+
 Route::get('product/{product:slug}', [HomeController::class, 'product'])->name('product');
 
 Route::get('cart', [CartController::class, 'viewCart'])->name('cart');

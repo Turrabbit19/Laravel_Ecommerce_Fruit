@@ -208,7 +208,7 @@
                                                 </ul>
                                             </li>
                                             <li>
-                                                <a href='contact.html'>Liên hệ</a>
+                                                <a href='{{route('contact')}}'>Liên hệ</a>
                                             </li>
                                         </ul>
                                     </nav>

@@ -123,13 +123,13 @@
                     </div>
                     <div class="col-lg-6 col-12">
                         <div class="your-order">
-                            <h3>Your order</h3>
+                            <h3>Đơn hàng của bạn</h3>
                             <div class="your-order-table table-responsive">
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th class="cart-product-name">Product</th>
-                                            <th class="cart-product-total">Total</th>
+                                            <th class="cart-product-name">Sản phẩm</th>
+                                            <th class="cart-product-total">Tổng</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -214,7 +214,7 @@
                                         </div>
                                     </div>
                                     <div class="order-button-payment">
-                                        <input value="Place order" type="submit">
+                                        <input value="Thanh toán" type="submit">
                                     </div>
                                 </div>
                             </div>

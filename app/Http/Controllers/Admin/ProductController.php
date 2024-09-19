@@ -42,9 +42,14 @@ class ProductController extends Controller
             if ($request->has('categories')) {
                 $product->categories()->sync($request->categories);
             }
-            
-            $this->storeProductVariants($product, $request->product_variants);
-            $this->storeProductGalleries($product, $request->product_galleries);
+
+            if ($request->has('product_variants') && !empty($request->product_variants)) {
+                $this->storeProductVariants($product, $request->product_variants);
+            }
+
+            if ($request->has('product_galleries') && !empty($request->product_galleries)) {
+                $this->storeProductGalleries($product, $request->product_galleries);
+            }
         });
 
         return redirect()->route('admin.products.index')->with('success', 'Thêm mới thành công.');
@@ -74,7 +79,11 @@ class ProductController extends Controller
             $product->categories()->sync($request->categories);
         }    
 
-        $this->updateProductVariants($product, $request->product_variants);
+        // Kiểm tra nếu có biến thể thì mới xử lý
+        if ($request->has('product_variants') && !empty($request->product_variants)) {
+            $this->updateProductVariants($product, $request->product_variants);
+        }
+
         if ($request->hasFile('product_galleries')) {
             $this->updateProductGalleries($product, $request->file('product_galleries'));
         }
@@ -117,24 +126,27 @@ class ProductController extends Controller
         $product->save();
     }
 
-    private function storeProductVariants(Product $product, array $variants)
-{
-    $totalQuantity = 0;
+    private function storeProductVariants(Product $product, array $variants = [])
+    {
+        if (empty($variants)) {
+            return;
+        }
 
-    foreach ($variants as $vars) {
-        $variant = $product->variants()->create([
-            'product_size_id' => $vars['size'],
-            'product_color_id' => $vars['color'],
-            'quantity' => $vars['quantity'] ?? 0
-        ]);
+        $totalQuantity = 0;
 
-        $totalQuantity += $variant->quantity;
+        foreach ($variants as $vars) {
+            $variant = $product->variants()->create([
+                'product_size_id' => $vars['size'],
+                'product_color_id' => $vars['color'],
+                'quantity' => $vars['quantity'] ?? 0
+            ]);
+
+            $totalQuantity += $variant->quantity;
+        }
+
+        $product->quantity = $totalQuantity;
+        $product->save();
     }
-
-    $product->quantity = $totalQuantity;
-    $product->save();
-}
-
 
     private function storeProductGalleries(Product $product, array $galleries)
     {
@@ -145,19 +157,23 @@ class ProductController extends Controller
         }
     }
 
-    private function updateProductVariants(Product $product, array $variants)
+    private function updateProductVariants(Product $product, array $variants = [])
     {
+        if (empty($variants)) {
+            return;
+        }
+
         $totalQuantity = 0;
-    
+
         foreach ($variants as $item) {
             $variant = $product->variants()->updateOrCreate(
                 ['product_size_id' => $item['size'], 'product_color_id' => $item['color']],
                 ['quantity' => $item['quantity'] ?? 0]
             );
-    
+
             $totalQuantity += $variant->quantity;
         }
-    
+
         $product->quantity = $totalQuantity;
         $product->save();
     }

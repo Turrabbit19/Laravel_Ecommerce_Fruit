@@ -11,51 +11,64 @@ class HomeController extends Controller
 {
     const PATH_VIEW = "client.harmics.";
 
-    public function index()
+    protected function loadCommonData()
     {
         $categories = Category::all();
-        $products = Product::query()->where('is_active', true)->latest('id')->take(8)->get();
-        $prosView = Product::query()->where('is_active', true)->latest('view')->take(6)->get();
-        $banners = Banner::query()->where('is_active', true)->latest('id')->take(3)->get();
-
         $cart = session()->get('cart', []);
 
-        return view(self::PATH_VIEW . __FUNCTION__, compact('categories', 'products', 'prosView', 'banners', 'cart'));
+        return compact('categories', 'cart');
+    }
+
+    public function index()
+    {
+        $products = Product::where('is_active', true)->latest('id')->take(8)->get();
+        $prosView = Product::where('is_active', true)->latest('view')->take(6)->get();
+        $banners = Banner::where('is_active', true)->latest('id')->take(3)->get();
+
+        return view(self::PATH_VIEW . __FUNCTION__, array_merge($this->loadCommonData(), compact('products', 'prosView', 'banners')));
     }
 
     public function shop()
     {
-        $categories = Category::all();
-        $products = Product::where('is_active', true)->latest('id')->paginate(9);
-        $prosRate = Product::query()->where('is_active', true)->latest('view')->take(6)->get();
+        $search = request()->query('search');
 
-        $cart = session()->get('cart', []);
+        $productSearch = Product::where('is_active', true);
 
-        return view(self::PATH_VIEW . __FUNCTION__, compact('categories', 'products', 'cart'));
+        if ($search) {
+            $productSearch->where('name', 'like', '%' . $search . '%')
+                 ->whereRaw('BINARY name like ?', ['%' . $search . '%']);
+        }
+
+        $products = $productSearch->latest('id')->paginate(9);
+        $prosRate = Product::where('is_active', true)->latest('view')->take(3)->get();
+
+        return view(self::PATH_VIEW . __FUNCTION__, array_merge($this->loadCommonData(), compact('products', 'prosRate')));
     }
+
 
     public function product(Product $product)
     {
-        $categories = Category::all();
-        $products = Product::query()->where('is_active', true)->latest('id')->take(8)->get();
+        $products = Product::where('is_active', true)->latest('id')->take(8)->get();
 
         $product->load('galleries', 'variants.size', 'variants.color', 'categories');
         $imageProduct = $product->galleries;
         $variantProduct = $product->variants;
-        $cart = session()->get('cart', []);
         
         $sizes = $variantProduct ? $variantProduct->pluck('size.name', 'size.id')->unique() : null;
         $colors = $variantProduct ? $variantProduct->pluck('color.name', 'color.id')->unique() : null;
 
         $product->increment('view');
 
-        return view(self::PATH_VIEW . __FUNCTION__, compact('categories', 'products', 'product', 'imageProduct', 'sizes', 'colors', 'cart'));   
+        return view(self::PATH_VIEW . __FUNCTION__, array_merge($this->loadCommonData(), compact('products', 'product', 'imageProduct', 'sizes', 'colors')));
     }
 
-    public function about() {
-        $categories = Category::all();
-        $cart = session()->get('cart', []);
+    public function about()
+    {
+        return view(self::PATH_VIEW . __FUNCTION__, $this->loadCommonData());
+    }
 
-        return view(self::PATH_VIEW . __FUNCTION__, compact('categories', 'cart'));
+    public function contact()
+    {
+        return view(self::PATH_VIEW . __FUNCTION__, $this->loadCommonData());
     }
 }

@@ -25,8 +25,8 @@
                 <div class="col-lg-3 order-lg-1 order-2 pt-10 pt-lg-0">
                     <div class="sidebar-area">
                         <div class="widgets-searchbox mb-9">
-                            <form id="widgets-searchbox" action="#">
-                                <input class="input-field" type="text" placeholder="Tìm kiếm">
+                            <form id="widgets-searchbox" action="{{ route('shop.search') }}" method="GET">
+                                <input class="input-field" type="text" name="search" value="{{ request()->query('search') }}" placeholder="Tìm kiếm">
                                 <button class="widgets-searchbox-btn" type="submit">
                                     <i class="pe-7s-search"></i>
                                 </button>
@@ -129,17 +129,18 @@
                             <div class="widgets-item">
                                 <div class="swiper-container widgets-list-slider">
                                     <div class="swiper-wrapper">
+                                        @foreach ($prosRate as $pros)
                                         <div class="swiper-slide">
                                             <div class="product-list-item">
                                                 <div class="product-img img-zoom-effect">
-                                                    <a href='single-product.html'>
-                                                        <img class="img-full" src="{{ asset('style/client/images/product/small-size/1-1-112x124.jpg') }}" alt="Product Images">
+                                                    <a href='{{route('product', ['product' => $pros->slug])}}'>
+                                                        <img class="img-full" src="{{ Storage::url($pros->img_thumb) }}" alt="{{$pros->name}}">
                                                     </a>
                                                 </div>
                                                 <div class="product-content">
-                                                    <a class='product-name' href='single-product.html'>Black Pepper Grains</a>
+                                                    <a class='product-name' href='{{route('product', ['product' => $pros->slug])}}'>{{$pros->name}}</a>
                                                     <div class="price-box pb-1">
-                                                        <span class="new-price">$80.00</span>
+                                                        <span class="new-price">{{number_format($pros->price)}}đ</span>
                                                     </div>
                                                     <div class="rating-box-wrap">
                                                         <div class="rating-box">
@@ -155,58 +156,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="swiper-slide">
-                                            <div class="product-list-item">
-                                                <div class="product-img img-zoom-effect">
-                                                    <a href='single-product.html'>
-                                                        <img class="img-full" src="{{ asset('style/client/images/product/small-size/1-2-112x124.jpg') }}" alt="Product Images">
-                                                    </a>
-                                                </div>
-                                                <div class="product-content">
-                                                    <a class='product-name' href='single-product.html'>Peanut Big Bean</a>
-                                                    <div class="price-box pb-1">
-                                                        <span class="new-price">$80.00</span>
-                                                    </div>
-                                                    <div class="rating-box-wrap">
-                                                        <div class="rating-box">
-                                                            <ul>
-                                                                <li><i class="pe-7s-star"></i></li>
-                                                                <li><i class="pe-7s-star"></i></li>
-                                                                <li><i class="pe-7s-star"></i></li>
-                                                                <li><i class="pe-7s-star"></i></li>
-                                                                <li><i class="pe-7s-star"></i></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="swiper-slide">
-                                            <div class="product-list-item">
-                                                <div class="product-img img-zoom-effect">
-                                                    <a href='single-product.html'>
-                                                        <img class="img-full" src="{{ asset('style/client/images/product/small-size/1-3-112x124.jpg') }}" alt="Product Images">
-                                                    </a>
-                                                </div>
-                                                <div class="product-content">
-                                                    <a class='product-name' href='single-product.html'>Dried Lemon Green</a>
-                                                    <div class="price-box pb-1">
-                                                        <span class="new-price">$80.00</span>
-                                                    </div>
-                                                    <div class="rating-box-wrap">
-                                                        <div class="rating-box">
-                                                            <ul>
-                                                                <li><i class="pe-7s-star"></i></li>
-                                                                <li><i class="pe-7s-star"></i></li>
-                                                                <li><i class="pe-7s-star"></i></li>
-                                                                <li><i class="pe-7s-star"></i></li>
-                                                                <li><i class="pe-7s-star"></i></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -267,7 +217,11 @@
                             </li>
                         </ul>
                     </div>
+                    @if ($products->isEmpty())
+                        
+                    @else
                     <div class="tab-content text-charcoal pt-8">
+                        
                         <div class="tab-pane fade show active" id="grid-view" role="tabpanel" aria-labelledby="grid-view-tab">
                             <div class="product-grid-view row">
                                 @foreach ($products as $pros)
@@ -304,7 +258,7 @@
                                         <div class="product-content">
                                             <a class='product-name' href='{{ route('product', ['product' => $pros->slug]) }}'>{{$pros->name}}</a>
                                             <div class="price-box pb-1">
-                                                <span class="new-price">{{number_format($pros->price)}} VND</span>
+                                                <span class="new-price">{{number_format($pros->price)}}đ</span>
                                             </div>
                                             <div class="rating-box">
                                                 <ul>
@@ -415,7 +369,7 @@
                             </ul>
                         </nav>
                     </div>
-                    
+                    @endif
                 </div>
             </div>
         </div>

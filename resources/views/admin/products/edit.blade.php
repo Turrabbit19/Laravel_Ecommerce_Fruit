@@ -26,13 +26,13 @@
                         </div>
                         <div class="mb-3">
                             <label for="price_sale" class="form-label">Giá gốc</label>
-                            <input type="number" id="price_sale" class="form-control" name="price_sale" value="{{ $product->price_sale }}" placeholder="Nhập giá gốc" required>
+                            <input type="number" id="price_sale" class="form-control" name="price_sale" value="{{ $product->price_sale }}" placeholder="Nhập giá gốc">
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">Mô tả sản phẩm</label>
-                            <div id="ckeditor-classic" name="description">
+                            <textarea name="description" id="ckeditor-classic">
                                 {{ $product->description }}
-                            </div>
+                            </textarea>
                         </div>
                     </div>
                 </div>
